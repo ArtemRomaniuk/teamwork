@@ -1,0 +1,45 @@
+:root {
+  --bg-main: #e9ecef;
+  --bg-bright: #f8f9fa;
+
+  --font-main: #495057;
+  --font-darkest: #212529;
+
+  --ui-main: #dee2e6;
+  --ui-darker: #ced4da;
+  --ui-darkest: #adb5bd;
+
+  --accent-main: #51cf66;
+  --accent-hover: #40c057;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: var(--bg-main);
+  color: var(--font-main);
+  line-height: normal;
+  height: 100dvh;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

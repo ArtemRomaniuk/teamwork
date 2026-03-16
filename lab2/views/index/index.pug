@@ -1,0 +1,84 @@
+extends ../layout
+
+block head
+  link(rel="stylesheet", href="/views/index/index.css")
+  script(defer type="module" src="/views/index/index.js")
+
+block content
+  main.container
+    form(id="calc-form")
+      h2 Додайте новий продукт до бази даних
+
+      .inputs-container 
+        label Назва продукції:
+          input(type="text" name="name" required)
+        label Кількість продукції:
+          input(type="number" name="quantity" value=1 required)
+        p.expenses-divider Витрати
+        label Сировина та основні матеріали:
+          input(type="number" name="basic_materials" required)
+        label Допоміжні матеріали:
+          input(type="number" name="sub_materials" required)
+        label Зворотні відходи (-):
+          input(type="number" name="rev_waste" required)
+        label Основна з/п виробничих робітників:
+          input(type="number" name="basic_salary" required)
+        label Додаткова з/п виробничих робітників:
+          input(type="number" name="sub_salary" required)
+        label Загальновиробничі витрати:
+          input(type="number" name="general_exp" required)
+      
+      button.form-button Додати продукт
+
+    .table-container
+      .table-header
+        h3 Таблиця планової калькуляції
+        button.save-to-excel Зберегти в xlsx
+
+      .table-wrapper
+        table#products_table
+          tr
+            th Вид продукції
+            th Кількість
+            th Сировина та основні матеріали
+            th Допоміжні матеріали
+            th Зворотні відходи (-)
+            th Основна <br/>з/п
+            th Додаткова з/п
+            th Нараховано ЄСВ
+            th Підготовка вироб-<br/>ництва
+            th Загально-<br/>виробничі витрати
+            th Адміні-<br/>стративні витрати
+            th Виробнича собівартість
+
+          each p in products
+            tr
+              td(rowspan="2").product_name
+                div= p.name
+                  div
+                    button.btn-edit(data-id=p.id) 🖋️
+                    button.btn-delete(data-id=p.id) 🗑️
+              td 1
+              td= p.basic_materials.toFixed(2)
+              td= p.sub_materials.toFixed(2)
+              td= p.rev_waste.toFixed(2)
+              td= p.basic_salary.toFixed(2)
+              td= p.sub_salary.toFixed(2)
+              td= p.esv.toFixed(2)
+              td= p.prod_prep.toFixed(2)
+              td= p.general_exp.toFixed(2)
+              td= p.administrative_exp.toFixed(2)
+              td= p.general_cost.toFixed(2)
+              
+            tr
+              td= p.quantity
+              td= (p.basic_materials * p.quantity).toFixed(2)
+              td= (p.sub_materials * p.quantity).toFixed(2)
+              td= (p.rev_waste * p.quantity).toFixed(2)
+              td= (p.basic_salary * p.quantity).toFixed(2)
+              td= (p.sub_salary * p.quantity).toFixed(2)
+              td= (p.esv * p.quantity).toFixed(2)
+              td= (p.prod_prep * p.quantity).toFixed(2)
+              td= (p.general_exp * p.quantity).toFixed(2)
+              td= (p.administrative_exp * p.quantity).toFixed(2)
+              td= (p.general_cost * p.quantity).toFixed(2)
